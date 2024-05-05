@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {  Middleware, configureStore } from "@reduxjs/toolkit";
 import userReducer from "./users/slice";
 
-const persistence = (store) => (next) => (action) => {
+const persistence: Middleware = (store ) => (next) => (action) => {
 	next(action);
 	localStorage.setItem("persistence", JSON.stringify(store.getState()));
 };
@@ -10,7 +10,7 @@ export const store = configureStore({
 	reducer: {
 		users: userReducer,
 	},
-	middlewares: [persistence],
+	middleware: [persistence],
 });
 
 //obtenemos el tipo de dato  que estamos guardando
